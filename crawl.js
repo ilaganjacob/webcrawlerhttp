@@ -8,7 +8,13 @@ function getURLsFromHTML(htmlBody, baseUrl) {
   const linkElements = dom.window.document.querySelectorAll("a");
 
   for (const linkElement of linkElements) {
-    urls.push(linkElement.href);
+    if (linkElement.href.slice(0, 1) === "/") {
+      // relative
+      urls.push(`${baseUrl}${linkElement.href}`);
+    } else {
+      // absolute
+      urls.push(linkElement.href);
+    }
   }
   return urls;
 }
