@@ -1,3 +1,4 @@
+const { link } = require("fs");
 const { JSDOM } = require("jsdom");
 
 function getURLsFromHTML(htmlBody, baseUrl) {
@@ -7,7 +8,7 @@ function getURLsFromHTML(htmlBody, baseUrl) {
   const linkElements = dom.window.document.querySelectorAll("a");
 
   for (const linkElement of linkElements) {
-    console.log(linkElement.href);
+    urls.push(linkElement.href);
   }
   return urls;
 }
