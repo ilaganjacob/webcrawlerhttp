@@ -1,5 +1,7 @@
 function normalizeURL(urlString) {
-  return urlString;
+  const urlObject = new URL(urlString);
+
+  return `${urlObject.hostname}${urlObject.pathname}`;
 }
 
 module.exports = {
