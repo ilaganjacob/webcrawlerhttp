@@ -10,10 +10,20 @@ function getURLsFromHTML(htmlBody, baseUrl) {
   for (const linkElement of linkElements) {
     if (linkElement.href.slice(0, 1) === "/") {
       // relative
-      urls.push(`${baseUrl}${linkElement.href}`);
+      try {
+        const urlObj = new URL(`${baseUrl}${linkElement.href}`);
+        urls.push(urlObj.href);
+      } catch (err) {
+        console.log(`error with relative url: ${err.message}`);
+      }
     } else {
-      // absolute
-      urls.push(linkElement.href);
+      try {
+        // absolute
+        const urlObj = new URL(linkElement.href);
+        urls.push(urlObj.href);
+      } catch (err) {
+        console.log(`error with absolute url: ${err.message}`);
+      }
     }
   }
   return urls;
